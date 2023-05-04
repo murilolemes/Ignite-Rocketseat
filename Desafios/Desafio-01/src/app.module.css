@@ -1,0 +1,97 @@
+.container {
+  padding-bottom: 2rem;
+}
+
+.formAddToDo {
+  margin: calc(0px - 2rem + 4px) auto;
+  max-width: 768px;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.formAddToDo button {
+  padding: 1rem;
+  background: var(--blue-dark);
+  border: 0;
+  border-radius: 8px;
+  color: var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.formAddToDo button:hover {
+  background: var(--blue);
+}
+
+.formAddToDo button svg {
+  color: var(--gray-100);
+}
+
+.content {
+  max-width: 768px;
+  margin: 5.5rem auto 0;
+}
+
+.todoCount {
+  display: flex;
+  justify-content: space-between;
+}
+
+.taskCreated {
+  color: var(--blue);
+}
+
+.completed {
+  color: var(--purple);
+}
+
+.taskCreated,
+.completed {
+  font-weight: bold;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.taskCreated span,
+.completed span {
+  font-size: 0.75rem;
+  background: var(--gray-400);
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  color: var(--gray-200);
+  margin-left: 0.5rem;
+}
+
+.notExistsTodoList {
+  padding: 4rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid var(--gray-400);
+  border-radius: 8px;
+  margin-top: 1.5rem;
+}
+
+.notExistsTodoList svg {
+  color: var(--gray-400);
+}
+
+.notExistsTodoList p {
+  color: var(--gray-300);
+  line-height: 1.4;
+}
+
+.FirstP {
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+@media(max-width: 768px) {
+  .formAddToDo {
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+}
