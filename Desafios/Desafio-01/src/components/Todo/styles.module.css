@@ -6,6 +6,7 @@
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
+  margin-top: 1.5rem;
 }
 
 .container+.container {
@@ -45,6 +46,7 @@
 .inputCheckbox:checked+.checkmark {
   background: var(--purple-dark);
   border: 2px solid var(--purple-dark);
+  transition: 0.2s;
 }
 
 .inputCheckbox:checked+.checkmark:hover {
@@ -82,6 +84,11 @@
   margin-left: 0.75rem;
 }
 
+.container .todoChecked {
+  color: var(--gray-300);
+  text-decoration: line-through;
+}
+
 .deleteTodo {
   width: 1.5rem;
   height: 1.5rem;
@@ -96,7 +103,6 @@
 
 .deleteTodo:hover {
   background: var(--gray-400);
-  color: var(--danger);
 }
 
 .deleteTodo svg {
