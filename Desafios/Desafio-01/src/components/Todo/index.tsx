@@ -1,37 +1,44 @@
-import { useState } from 'react';
 import { Trash } from 'phosphor-react';
 
 import styles from './styles.module.css';
 
 export interface TodoProps {
-  id: number;
+  id: string;
+  checked: boolean;
   content: string;
 }
 
 interface TodoContent {
   todoContent: TodoProps;
-  onHandleDeleteTodo: (id: number) => void;
+  onHandleDeleteTodo: (id: string) => void;
+  onHandleCheckedTodo: (id: string) => void;
 }
 
-export function Todo({ todoContent, onHandleDeleteTodo }: TodoContent) {
-  const [checked, setChecked] = useState(false);
-
-  function handleCheckbox() {
-    checked ? setChecked(false) : setChecked(true);
+export function Todo({ todoContent, onHandleCheckedTodo, onHandleDeleteTodo }: TodoContent) {
+  function handleCheckbox(id: string) {
+    onHandleCheckedTodo(id);
   }
 
-  function handleDeleteTodo(id: number) {
+  function handleDeleteTodo(id: string) {
     onHandleDeleteTodo(id);
   }
 
   return (
     <div className={styles.container}>
-
-      <button type='button' onClick={handleCheckbox} className={styles.checkbox}>
-        <input type="checkbox" onChange={handleCheckbox} checked={checked} className={styles.inputCheckbox} />
+      <button
+        type='button'
+        onClick={() => handleCheckbox(todoContent.id)}
+        className={styles.checkbox}
+      >
+        <input
+          type="checkbox"
+          onChange={() => handleCheckbox(todoContent.id)}
+          checked={todoContent.checked}
+          className={styles.inputCheckbox}
+        />
         <span className={styles.checkmark}></span>
       </button>
-      <p className={checked ? styles.todoChecked : ''}>
+      <p className={todoContent.checked ? styles.todoChecked : ''}>
         {todoContent.content}
       </p>
       <button

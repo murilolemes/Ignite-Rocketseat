@@ -9,8 +9,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 export function Input({ hasBorder, ...props }: InputProps) {
   return (
     <input
-      className={styles.input}
-      onFocus={() => hasBorder}
+      className={hasBorder ? styles.inputHasBorder : styles.input}
       {...props}
     />
   )

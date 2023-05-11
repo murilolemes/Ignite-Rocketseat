@@ -26,6 +26,15 @@
   background: var(--blue);
 }
 
+.formAddToDo button:disabled {
+  cursor: no-drop;
+}
+
+.formAddToDo button:disabled:hover {
+  background: var(--blue-dark);
+  filter: brightness(0.8);
+}
+
 .formAddToDo button svg {
   color: var(--gray-100);
 }

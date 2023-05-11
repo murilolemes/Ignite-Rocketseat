@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
 import { PlusCircle, ClipboardText } from 'phosphor-react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Header } from './components/Header'
 import { Input } from './components/Input'
@@ -10,49 +11,98 @@ import './styles/global.css'
 
 const todoList: TodoProps[] = [
   {
-    id: 1,
+    id: uuidv4(),
+    checked: false,
     content: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
   },
   {
-    id: 2,
+    id: uuidv4(),
+    checked: false,
     content: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
   },
   {
-    id: 3,
+    id: uuidv4(),
+    checked: false,
     content: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
   },
   {
-    id: 4,
+    id: uuidv4(),
+    checked: true,
     content: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
   },
-  {
-    id: 5,
-    content: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
-  },
-  {
-    id: 6,
-    content: 'Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.',
-  }
 ]
 
 export function App() {
-  const [updateTodoList, setUpdateTodoList] = useState([...todoList])
+  const [updateTodoList, setUpdateTodoList] = useState([...todoList]);
+  const [newTodo, setNewTodo] = useState('');
 
-  function handleDeleteTodo(id: number) {
-    const teste = updateTodoList.filter(todo => todo.id !== id)
+  function handleNewTodo(event: FormEvent) {
+    event.preventDefault();
 
-    setUpdateTodoList(teste)
+    setUpdateTodoList([...updateTodoList, {
+      id: uuidv4(),
+      checked: false,
+      content: newTodo,
+    }]);
+
+    setNewTodo('');
   }
+
+  function handleNewTodoChange(event: ChangeEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('');
+    setNewTodo(event.target.value);
+  }
+
+  function handleNewTodoInvalid(event: InvalidEvent<HTMLInputElement>) {
+    event.target.setCustomValidity('Esse campo é obrigatório!');
+  }
+
+  function handleCheckbox(id: string) {
+    const updateChecked = updateTodoList.map(todo => {
+      if (todo.id === id) {
+        return {
+          id: todo.id,
+          checked: todo.checked ? false : true,
+          content: todo.content
+        }
+      } else {
+        return todo
+      }
+    });
+
+    setUpdateTodoList(updateChecked)
+  }
+
+  function handleDeleteTodo(id: string) {
+    const deleteTodo = updateTodoList.filter(todo => todo.id !== id);
+
+    setUpdateTodoList(deleteTodo);
+  }
+
+  const isNewTodoEmpty = newTodo.length === 0;
+
+  const todoChecked = updateTodoList.reduce((acc, element) => {
+    return acc += element.checked === true ? 1 : 0;
+  }, 0)
 
   return (
     <div className={styles.container}>
       <Header />
-      <form className={styles.formAddToDo}>
+      <form onSubmit={handleNewTodo} className={styles.formAddToDo}>
         <Input
-          hasBorder={false}
           placeholder='Adicione uma nova tarefa'
+          value={newTodo}
+          onChange={handleNewTodoChange}
+          onInvalid={handleNewTodoInvalid}
+          required
+          hasBorder={!isNewTodoEmpty}
         />
-        <button>Criar <PlusCircle weight='regular' size={16} /></button>
+        <button
+          disabled={isNewTodoEmpty}
+        >
+          Criar
+          <PlusCircle weight='regular' size={16} />
+        </button>
       </form>
       <div className={styles.content}>
         <div className={styles.todoCount}>
@@ -62,7 +112,7 @@ export function App() {
           </p>
           <p className={styles.completed}>
             Concluídas
-            <span>2 de {updateTodoList.length}</span>
+            <span>{updateTodoList.length === 0 ? 0 : `${todoChecked} de ${updateTodoList.length}`}</span>
           </p>
         </div>
         <div>
@@ -75,9 +125,11 @@ export function App() {
             :
             updateTodoList.map(todo => {
               return (
-                <Todo key={todo.id}
+                <Todo
+                  key={todo.id}
                   onHandleDeleteTodo={handleDeleteTodo}
                   todoContent={todo}
+                  onHandleCheckedTodo={handleCheckbox}
                 />
               )
             })
