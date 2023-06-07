@@ -1,4 +1,4 @@
-import { styled } from 'styled-components'
+import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
   max-width: 1440px;
@@ -17,11 +17,11 @@ export const HeaderContainer = styled.header`
     gap: 0.75rem;
 
     a {
-      background: ${(props) => props.theme['puple-200']};
+      background: ${(props) => props.theme['purple-200']};
       padding: 0.5rem;
       border-radius: 6px;
       font: var(--text-s);
-      color: ${(props) => props.theme['puple-700']};
+      color: ${(props) => props.theme['purple-700']};
 
       display: flex;
       align-items: center;
@@ -30,15 +30,15 @@ export const HeaderContainer = styled.header`
       transition: background-color 0.2s;
 
       svg {
-        color: ${(props) => props.theme['puple-500']};
+        color: ${(props) => props.theme['purple-500']};
         transition: color 0.2s;
       }
 
       &:hover {
-        background: ${(props) => props.theme['puple-500']};
+        background: ${(props) => props.theme['purple-500']};
 
         svg {
-          color: ${(props) => props.theme['puple-700']};
+          color: ${(props) => props.theme['purple-700']};
         }
       }
     }
@@ -54,6 +54,7 @@ export const HeaderContainer = styled.header`
       justify-content: center;
 
       transition: background-color 0.2s;
+      position: relative;
 
       svg {
         color: ${(props) => props.theme['yellow-700']};
@@ -61,6 +62,24 @@ export const HeaderContainer = styled.header`
 
       &:hover {
         background: ${(props) => props.theme['yellow-500']};
+      }
+
+      span {
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 50%;
+        background: ${(props) => props.theme['yellow-700']};
+        color: ${(props) => props.theme.white};
+        font: var(--text-s);
+        font-weight: 700;
+
+        position: absolute;
+        top: -8px;
+        right: -8px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }

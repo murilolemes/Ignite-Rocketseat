@@ -1,7 +1,8 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
 import coffeeSVG from '../../assets/img-coffee.svg'
 
-import { Introduction, MainContainer } from './styles'
+import { Introduction, Item, MainContainer, OurCoffee } from './styles'
+import { CardsCoffee } from './CardsCoffee'
 
 export function Home() {
   return (
@@ -16,34 +17,46 @@ export function Home() {
             </p>
           </div>
           <div className="items">
-            <p>
-              <span>
-                <ShoppingCart size={16} weight="fill" />
-              </span>
-              Compra simples e segura
-            </p>
-            <p>
-              <span>
-                <Package size={16} weight="fill" />
-              </span>
-              Embalagem mantém o café intacto
-            </p>
-            <p>
-              <span>
-                <Timer size={16} weight="fill" />
-              </span>
-              Entrega rápida e rastreada
-            </p>
-            <p>
-              <span>
-                <Coffee size={16} weight="fill" />
-              </span>
-              O café chega fresquinho até você
-            </p>
+            <Item backgroundcoloritems="cart">
+              <p>
+                <span>
+                  <ShoppingCart size={16} weight="fill" />
+                </span>
+                Compra simples e segura
+              </p>
+            </Item>
+            <Item backgroundcoloritems="packege">
+              <p>
+                <span>
+                  <Package size={16} weight="fill" />
+                </span>
+                Embalagem mantém o café intacto
+              </p>
+            </Item>
+            <Item backgroundcoloritems="timer">
+              <p>
+                <span>
+                  <Timer size={16} weight="fill" />
+                </span>
+                Entrega rápida e rastreada
+              </p>
+            </Item>
+            <Item backgroundcoloritems="coffee">
+              <p>
+                <span>
+                  <Coffee size={16} weight="fill" />
+                </span>
+                O café chega fresquinho até você
+              </p>
+            </Item>
           </div>
         </div>
         <img src={coffeeSVG} alt="" />
       </Introduction>
+      <OurCoffee>
+        <h2>Nossos cafés</h2>
+        <CardsCoffee />
+      </OurCoffee>
     </MainContainer>
   )
 }
