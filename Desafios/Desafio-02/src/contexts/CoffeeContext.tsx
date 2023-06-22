@@ -21,7 +21,7 @@ export function CoffeeContextProvider({
   children,
 }: CoffeeContextProviderProps) {
   const [products, setProducts] = useState<Product[]>(() => {
-    if (!!arrayProducts) {
+    if (arrayProducts) {
       return arrayProducts
     }
     return []
@@ -74,6 +74,7 @@ export function CoffeeContextProvider({
 
   function removeItemCart(id: string) {
     console.log(id)
+    setProducts([])
   }
 
   return (

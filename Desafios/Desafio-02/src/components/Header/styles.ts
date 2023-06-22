@@ -16,7 +16,7 @@ export const HeaderContainer = styled.header`
     display: flex;
     gap: 0.75rem;
 
-    a {
+    p {
       background: ${(props) => props.theme['purple-200']};
       padding: 0.5rem;
       border-radius: 6px;
@@ -33,17 +33,9 @@ export const HeaderContainer = styled.header`
         color: ${(props) => props.theme['purple-500']};
         transition: color 0.2s;
       }
-
-      &:hover {
-        background: ${(props) => props.theme['purple-500']};
-
-        svg {
-          color: ${(props) => props.theme['purple-700']};
-        }
-      }
     }
 
-    button {
+    a {
       background: ${(props) => props.theme['yellow-200']};
       padding: 0.5rem;
       border: 0;
@@ -70,8 +62,8 @@ export const HeaderContainer = styled.header`
         border-radius: 50%;
         background: ${(props) => props.theme['yellow-700']};
         color: ${(props) => props.theme.white};
-        font: var(--text-s);
-        font-weight: 700;
+        font: var(--text-xs);
+        line-height: 0;
 
         position: absolute;
         top: -8px;

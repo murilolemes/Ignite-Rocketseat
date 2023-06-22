@@ -20,7 +20,7 @@ export function productsReducer(state: ProductsState, action: any) {
   console.log('state', state)
   switch (action.type) {
     case ActionTypes.LIST_PRODUCTS:
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         draft.products.push(action.payload.listProducts)
       })
     // case ActionTypes.ADD_PRODUCTS:

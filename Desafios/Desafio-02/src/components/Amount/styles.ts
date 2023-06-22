@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const AmountContainer = styled.div`
   background: ${(props) => props.theme['base-button']};

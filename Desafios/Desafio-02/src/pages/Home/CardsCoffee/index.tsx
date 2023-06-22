@@ -11,29 +11,31 @@ export function CardsCoffee() {
 
   return (
     <DivCardsCoffee>
-      {
-        products.map(product => {
-          return (
-            <Card key={product.id}>
-              <img src={product.img} />
-              <div className='styleType'>
-                {product.types.map(type => (
-                  <p key={type}>{type}</p>
-                ))}
+      {products.map((product) => {
+        return (
+          <Card key={product.id}>
+            <img src={product.img} alt="" />
+            <div className="styleType">
+              {product.types.map((type) => (
+                <p key={type}>{type}</p>
+              ))}
+            </div>
+            <h3>{product.title}</h3>
+            <p>{product.description}</p>
+            <Buy>
+              <p>
+                R$ <span>{formatValue(product.value)}</span>
+              </p>
+              <div className="actions">
+                <Amount />
+                <button className="buy">
+                  <ShoppingCart size={22} weight="fill" />
+                </button>
               </div>
-              <h3>{product.title}</h3>
-              <p>{product.description}</p>
-              <Buy>
-                <p>R$ <span>{formatValue(product.value)}</span></p>
-                <div className="actions">
-                  <Amount />
-                  <button className='buy'><ShoppingCart size={22} weight='fill' /></button>
-                </div>
-              </Buy>
-            </Card>
-          )
-        })
-      }
+            </Buy>
+          </Card>
+        )
+      })}
     </DivCardsCoffee>
   )
 }

@@ -1,24 +1,24 @@
-import { Input } from "../../../components/Input";
+import { Input } from '../../../components/Input'
 
-import { FormContainer } from "./styles";
+import { FormContainer } from './styles'
 
 export function Form() {
   return (
     <FormContainer>
       <div className="divCEP">
-        <Input name='CEP' placeholder="CEP" />
+        <Input name="CEP" placeholder="CEP" />
       </div>
-      <div className="rua">
-        <Input name='CEP' placeholder="Rua" />
+      <div className="address">
+        <Input name="address" placeholder="Rua" />
       </div>
       <div className="num">
-        <Input name='CEP' placeholder="Número" />
-        <Input name='CEP' placeholder="Complemento" />
+        <Input name="number" placeholder="Número" />
+        <Input name="complement" placeholder="Complemento" content="Opcional" />
       </div>
-      <div className="bai">
-        <Input name='CEP' placeholder="Bairro" />
-        <Input name='CEP' placeholder="Cidade" />
-        <Input name='CEP' placeholder="UF" />
+      <div className="district">
+        <Input name="district" placeholder="Bairro" />
+        <Input name="city" placeholder="Cidade" />
+        <Input name="uf" placeholder="UF" />
       </div>
     </FormContainer>
   )

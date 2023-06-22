@@ -53,26 +53,26 @@ export const Item = styled.div<ItemsProps>`
     color: ${(props) => props.theme.background};
 
     ${(props) =>
-    props.backgroundcoloritems === 'cart' &&
-    css`
+      props.backgroundcoloritems === 'cart' &&
+      css`
         background: ${(props) => props.theme['yellow-700']};
       `}
 
     ${(props) =>
-    props.backgroundcoloritems === 'packege' &&
-    css`
+      props.backgroundcoloritems === 'packege' &&
+      css`
         background: ${(props) => props.theme['base-text']};
       `}
 
     ${(props) =>
-    props.backgroundcoloritems === 'timer' &&
-    css`
+      props.backgroundcoloritems === 'timer' &&
+      css`
         background: ${(props) => props.theme['yellow-500']};
       `}
 
     ${(props) =>
-    props.backgroundcoloritems === 'coffee' &&
-    css`
+      props.backgroundcoloritems === 'coffee' &&
+      css`
         background: ${(props) => props.theme['purple-500']};
       `}
   }
