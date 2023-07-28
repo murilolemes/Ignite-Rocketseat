@@ -29,6 +29,7 @@ export const ButtonContainer = styled.button<ButtonProps>`
     props.$isActive &&
     css`
       border: 1px solid ${(props) => props.theme['purple-500']};
+      background: ${(props) => props.theme['purple-200']};
     `}
 
   &:hover {

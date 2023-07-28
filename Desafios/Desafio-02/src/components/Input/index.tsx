@@ -1,11 +1,15 @@
 import { InputHTMLAttributes, useState } from 'react'
+import { useFormContext } from 'react-hook-form'
+
 import { InputContainer } from './styles'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   content?: string
+  onRegister: string
 }
 
-export function Input({ content, ...rest }: InputProps) {
+export function Input({ content, onRegister, ...rest }: InputProps) {
+  const { register } = useFormContext()
   const [isFocused, setIsFocused] = useState(false)
 
   function handleInputFocus() {
@@ -17,8 +21,13 @@ export function Input({ content, ...rest }: InputProps) {
   }
 
   return (
-    <InputContainer $isFocused={isFocused}>
-      <input onFocus={handleInputFocus} onBlur={handleInputBlur} {...rest} />
+    <InputContainer $isFocused={isFocused} htmlFor={rest.id}>
+      <input
+        {...register(onRegister)}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
+        {...rest}
+      />
       {!!content && (
         <span>
           <i>{content}</i>

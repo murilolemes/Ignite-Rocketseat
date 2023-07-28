@@ -35,6 +35,11 @@ export const InputContainer = styled.label<ContainerProps>`
     }
   }
 
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
   span {
     font: var(--text-xs);
     color: ${(props) => props.theme['base-label']};

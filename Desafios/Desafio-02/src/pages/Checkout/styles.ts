@@ -1,13 +1,15 @@
 import styled from 'styled-components'
 
-export const CheckoutContainer = styled.form`
+export const CheckoutContainer = styled.div`
   max-width: 1440px;
   margin: 0 auto;
   padding: 2.5rem 10rem;
 
-  display: grid;
-  grid-template-columns: 8fr 5fr;
-  gap: 2rem;
+  form {
+    display: grid;
+    grid-template-columns: 8fr 5fr;
+    gap: 2rem;
+  }
 `
 
 export const RegisterContent = styled.div`

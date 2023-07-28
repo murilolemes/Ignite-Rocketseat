@@ -70,7 +70,6 @@ export const Buy = styled.div`
 
   .actions {
     display: flex;
-    align-items: center;
     gap: 0.5rem;
 
     .buy {
@@ -80,8 +79,6 @@ export const Buy = styled.div`
       border-radius: 6px;
 
       display: flex;
-      align-items: center;
-      justify-content: center;
 
       transition: background-color 0.2s;
 

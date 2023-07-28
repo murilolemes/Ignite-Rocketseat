@@ -1,8 +1,9 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
+
 import coffeeSVG from '../../assets/img-coffee.svg'
+import { CardsCoffee } from './CardsCoffee'
 
 import { Introduction, Item, MainContainer, OurCoffee } from './styles'
-import { CardsCoffee } from './CardsCoffee'
 
 export function Home() {
   return (

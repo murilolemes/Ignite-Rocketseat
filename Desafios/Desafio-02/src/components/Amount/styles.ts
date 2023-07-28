@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 
 export const AmountContainer = styled.div`
+  width: 4.5rem;
   background: ${(props) => props.theme['base-button']};
   padding: 0.5rem;
   border-radius: 6px;
 
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.25rem;
 
   p {

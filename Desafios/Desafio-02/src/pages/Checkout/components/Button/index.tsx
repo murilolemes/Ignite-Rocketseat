@@ -1,23 +1,25 @@
-import React, { InputHTMLAttributes, useState } from 'react'
+import React, { InputHTMLAttributes } from 'react'
 import { IconProps } from 'phosphor-react'
+
 import { ButtonContainer } from './styles'
 
 interface ButtonProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ComponentType<IconProps>
   content: string
+  isActive: boolean
   onHandleButtonIsActive: (type: string) => void
 }
 
 export function Button({
   icon: Icon,
   content,
+  isActive,
   onHandleButtonIsActive,
 }: ButtonProps) {
-  const [isActive, setIsActive] = useState(false)
   function handleButtonIsActive(type: string) {
     onHandleButtonIsActive(type)
-    setIsActive(true)
   }
+
   return (
     <ButtonContainer
       type="button"

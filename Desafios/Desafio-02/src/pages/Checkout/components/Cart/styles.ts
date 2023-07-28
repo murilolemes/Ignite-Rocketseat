@@ -48,32 +48,32 @@ export const Item = styled.div`
       .footerItem {
         display: flex;
         gap: 0.5rem;
-
-        button {
-          display: flex;
-          align-items: center;
-          gap: 0.25rem;
-
-          padding: 0 0.5rem;
-          border: 0;
-          background: ${(props) => props.theme['base-button']};
-          border-radius: 6px;
-
-          transition: background 0.2s;
-
-          font: var(--button-m);
-          color: ${(props) => props.theme['base-text']};
-
-          svg {
-            color: ${(props) => props.theme['purple-500']};
-          }
-
-          &:hover {
-            background: ${(props) => props.theme['base-hover']};
-          }
-        }
       }
     }
+  }
+`
+
+export const ButtonDeleteItem = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  padding: 0 0.5rem;
+  border: 0;
+  background: ${(props) => props.theme['base-button']};
+  border-radius: 6px;
+
+  transition: background 0.2s;
+
+  font: var(--button-m);
+  color: ${(props) => props.theme['base-text']};
+
+  svg {
+    color: ${(props) => props.theme['purple-500']};
+  }
+
+  &:hover {
+    background: ${(props) => props.theme['base-hover']};
   }
 `
 
@@ -107,7 +107,11 @@ export const Total = styled.div`
     }
   }
 
+  a,
   button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     font: var(--button-g);
     color: ${(props) => props.theme.white};

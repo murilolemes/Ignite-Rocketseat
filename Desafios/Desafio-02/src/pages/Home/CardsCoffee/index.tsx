@@ -1,17 +1,27 @@
+import { useContext } from 'react'
 import { ShoppingCart } from 'phosphor-react'
 
-import { DivCardsCoffee, Card, Buy } from './styled'
-import { useContext } from 'react'
 import { CoffeeContext } from '../../../contexts/CoffeeContext'
 import { formatValue } from '../../../utils/formatValue'
 import { Amount } from '../../../components/Amount'
+import { Product } from '../../../reducers/products/reducer'
+
+import { DivCardsCoffee, Card, Buy } from './styled'
 
 export function CardsCoffee() {
-  const { products } = useContext(CoffeeContext)
+  const {
+    listProducts,
+    createNewProductCart,
+    decrementItemList,
+    incrementItemList,
+  } = useContext(CoffeeContext)
+  function newProductCart(data: Product) {
+    createNewProductCart(data)
+  }
 
   return (
     <DivCardsCoffee>
-      {products.map((product) => {
+      {listProducts.map((product) => {
         return (
           <Card key={product.id}>
             <img src={product.img} alt="" />
@@ -24,11 +34,16 @@ export function CardsCoffee() {
             <p>{product.description}</p>
             <Buy>
               <p>
-                R$ <span>{formatValue(product.value)}</span>
+                R$ <span>{formatValue(product.total)}</span>
               </p>
               <div className="actions">
-                <Amount />
-                <button className="buy">
+                <Amount
+                  id={product.id}
+                  amountItem={product.amount}
+                  decrement={decrementItemList}
+                  increment={incrementItemList}
+                />
+                <button className="buy" onClick={() => newProductCart(product)}>
                   <ShoppingCart size={22} weight="fill" />
                 </button>
               </div>
