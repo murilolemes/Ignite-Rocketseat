@@ -1,114 +1,48 @@
 import { Link } from 'react-router-dom'
+
 import { CardsContainer, DescriptionCard, HeaderCard } from './styles'
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+import { useContextSelector } from 'use-context-selector'
+import { IssuesContext } from '../../../../contexts/IssuesContext'
 
 export function Cards() {
+  const issues = useContextSelector(IssuesContext, (context) => {
+    return context.issues
+  })
+
+  const fetchUrlIssue = useContextSelector(IssuesContext, (context) => {
+    return context.fetchIssueContent
+  })
+
+  function handleIssue(url: string) {
+    fetchUrlIssue(url)
+  }
+
   return (
     <CardsContainer>
-      <Link to={'/post'}>
-        <HeaderCard>
-          <h2>JavaScript data types and data structures</h2>
-          <p>Há 1 dia</p>
-        </HeaderCard>
-        <DescriptionCard>
-          <p>
-            Programming languages all have built-in data structures, but these
-            often differ from one language to another. This article attempts to
-            list the built-in data structures available in JavaScript and what
-            properties they have. These can be used to build other data
-            structures. Wherever possible, comparisons with other languages are
-            drawn. Dynamic typing JavaScript is a loosely typed and dynamic
-            language. Variables in JavaScript are not directly associated with
-            any particular value type, and any variable can be assigned (and
-            re-assigned) values of all types: let foo = 42; // foo is now a
-            number foo = bar; // foo is now a string foo = true; // foo is now a
-            boolean
-          </p>
-        </DescriptionCard>
-      </Link>
-      <Link to={'/post'}>
-        <HeaderCard>
-          <h2>JavaScript data types and data structures</h2>
-          <p>Há 1 dia</p>
-        </HeaderCard>
-        <DescriptionCard>
-          <p>
-            Programming languages all have built-in data structures, but these
-            often differ from one language to another. This article attempts to
-            list the built-in data structures available in JavaScript and what
-            properties they have. These can be used to build other data
-            structures. Wherever possible, comparisons with other languages are
-            drawn. Dynamic typing JavaScript is a loosely typed and dynamic
-            language. Variables in JavaScript are not directly associated with
-            any particular value type, and any variable can be assigned (and
-            re-assigned) values of all types: let foo = 42; // foo is now a
-            number foo = bar; // foo is now a string foo = true; // foo is now a
-            boolean
-          </p>
-        </DescriptionCard>
-      </Link>
-      <Link to={'/post'}>
-        <HeaderCard>
-          <h2>JavaScript data types and data structures</h2>
-          <p>Há 1 dia</p>
-        </HeaderCard>
-        <DescriptionCard>
-          <p>
-            Programming languages all have built-in data structures, but these
-            often differ from one language to another. This article attempts to
-            list the built-in data structures available in JavaScript and what
-            properties they have. These can be used to build other data
-            structures. Wherever possible, comparisons with other languages are
-            drawn. Dynamic typing JavaScript is a loosely typed and dynamic
-            language. Variables in JavaScript are not directly associated with
-            any particular value type, and any variable can be assigned (and
-            re-assigned) values of all types: let foo = 42; // foo is now a
-            number foo = bar; // foo is now a string foo = true; // foo is now a
-            boolean
-          </p>
-        </DescriptionCard>
-      </Link>
-      <Link to={'/post'}>
-        <HeaderCard>
-          <h2>JavaScript data types and data structures</h2>
-          <p>Há 1 dia</p>
-        </HeaderCard>
-        <DescriptionCard>
-          <p>
-            Programming languages all have built-in data structures, but these
-            often differ from one language to another. This article attempts to
-            list the built-in data structures available in JavaScript and what
-            properties they have. These can be used to build other data
-            structures. Wherever possible, comparisons with other languages are
-            drawn. Dynamic typing JavaScript is a loosely typed and dynamic
-            language. Variables in JavaScript are not directly associated with
-            any particular value type, and any variable can be assigned (and
-            re-assigned) values of all types: let foo = 42; // foo is now a
-            number foo = bar; // foo is now a string foo = true; // foo is now a
-            boolean
-          </p>
-        </DescriptionCard>
-      </Link>
-      <Link to={'/post'}>
-        <HeaderCard>
-          <h2>JavaScript data types and data structures</h2>
-          <p>Há 1 dia</p>
-        </HeaderCard>
-        <DescriptionCard>
-          <p>
-            Programming languages all have built-in data structures, but these
-            often differ from one language to another. This article attempts to
-            list the built-in data structures available in JavaScript and what
-            properties they have. These can be used to build other data
-            structures. Wherever possible, comparisons with other languages are
-            drawn. Dynamic typing JavaScript is a loosely typed and dynamic
-            language. Variables in JavaScript are not directly associated with
-            any particular value type, and any variable can be assigned (and
-            re-assigned) values of all types: let foo = 42; // foo is now a
-            number foo = bar; // foo is now a string foo = true; // foo is now a
-            boolean
-          </p>
-        </DescriptionCard>
-      </Link>
+      {issues?.map((issue) => {
+        return (
+          <Link
+            to={'/post'}
+            key={issue.number}
+            onClick={() => handleIssue(issue.url)}
+          >
+            <HeaderCard>
+              <h2>{issue.title}</h2>
+              <p>
+                {formatDistanceToNow(new Date(issue.created_at), {
+                  addSuffix: true,
+                  locale: ptBR,
+                })}
+              </p>
+            </HeaderCard>
+            <DescriptionCard>
+              {issue.body !== null ? <p>{issue.body}</p> : ''}
+            </DescriptionCard>
+          </Link>
+        )
+      })}
     </CardsContainer>
   )
 }

@@ -46,6 +46,14 @@ export const PostInfo = styled.div`
   h1 {
     font: var(--title-l);
     color: ${(props) => props.theme['base-title']};
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    svg {
+      color: #f8d030;
+    }
   }
 
   .info {

@@ -45,12 +45,11 @@ export const HeaderCard = styled.header`
 
 export const DescriptionCard = styled.div`
   height: 100%;
-
-  display: flex;
   overflow: hidden;
 
   p {
-    display: flex;
+    width: 100%;
+    max-width: 21.875rem;
     font: var(--text-m);
   }
 `

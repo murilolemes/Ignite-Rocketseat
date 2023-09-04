@@ -1,14 +1,44 @@
+import { Link } from 'react-router-dom'
 import {
   ArrowSquareOut,
-  Buildings,
+  CalendarBlank,
   CaretLeft,
+  ChatCircle,
   GithubLogo,
-  Users,
+  Warning,
 } from 'phosphor-react'
+
 import { PostContainer, PostContent, PostInfo } from './styles'
-import { Link } from 'react-router-dom'
+import { useContextSelector } from 'use-context-selector'
+import { IssuesContext } from '../../contexts/IssuesContext'
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 
 export function Post() {
+  const issueContent = useContextSelector(IssuesContext, (context) => {
+    return context.issueContent
+  })
+
+  if (!issueContent) {
+    return (
+      <PostContainer>
+        <PostInfo>
+          <div className="links">
+            <Link to={'/'}>
+              <CaretLeft size={12} weight="bold" /> Voltar
+            </Link>
+          </div>
+          <h1>
+            <Warning size={22} weight="fill" />
+            Issue não encontrada
+            <Warning size={22} weight="fill" />
+          </h1>
+        </PostInfo>
+      </PostContainer>
+    )
+  }
+
   return (
     <PostContainer>
       <PostInfo>
@@ -17,7 +47,7 @@ export function Post() {
             <CaretLeft size={12} weight="bold" /> Voltar
           </Link>
           <Link
-            to="https://github.com/murilolemes"
+            to={issueContent.html_url}
             target="_blank"
             title="Acesse o Github"
           >
@@ -25,48 +55,28 @@ export function Post() {
             <ArrowSquareOut size={12} weight="fill" />
           </Link>
         </div>
-        <h1>JavaScript data types and data structures</h1>
+        <h1>{issueContent.title}</h1>
         <div className="info">
           <p>
-            <GithubLogo size={18} /> murilolemes
+            <GithubLogo size={18} />
+            {issueContent.login}
           </p>
           <p>
-            <Buildings size={18} /> Rocketseat
+            <CalendarBlank size={18} weight="fill" />
+            {formatDistanceToNow(new Date(issueContent.created_at), {
+              addSuffix: true,
+              locale: ptBR,
+            })}
           </p>
           <p>
-            <Users size={18} /> 32 seguidores
+            <ChatCircle size={18} weight="fill" />
+            {issueContent.comments} comentarios
           </p>
         </div>
       </PostInfo>
 
       <PostContent>
-        <p>
-          Programming languages all have built-in data structures, but these
-          often differ from one language to another. This article attempts to
-          list the built-in data structures available in JavaScript and what
-          properties they have. These can be used to build other data
-          structures. Wherever possible, comparisons with other languages are
-          drawn.
-          <br />
-          <br />
-          Dynamic typing <br />
-          JavaScript is a loosely typed and dynamic language. Variables in
-          JavaScript are not directly associated with any particular value type,
-          and any variable can be assigned (and re-assigned) values of all
-          types:
-        </p>
-
-        <div>
-          <p>
-            <span>let</span> foo = 42; <span>//foo is now a number</span>
-          </p>
-          <p>
-            foo = 'bar'; <span>//foo is now a number</span>
-          </p>
-          <p>
-            foo = 'true'; <span>//foo is now a number</span>
-          </p>
-        </div>
+        <ReactMarkdown>{issueContent.body}</ReactMarkdown>
       </PostContent>
     </PostContainer>
   )
