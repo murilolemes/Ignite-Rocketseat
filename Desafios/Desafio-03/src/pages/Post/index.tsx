@@ -1,4 +1,8 @@
 import { Link } from 'react-router-dom'
+import { useContextSelector } from 'use-context-selector'
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+
 import {
   ArrowSquareOut,
   CalendarBlank,
@@ -8,12 +12,10 @@ import {
   Warning,
 } from 'phosphor-react'
 
-import { PostContainer, PostContent, PostInfo } from './styles'
-import { useContextSelector } from 'use-context-selector'
 import { IssuesContext } from '../../contexts/IssuesContext'
-import { formatDistanceToNow } from 'date-fns'
-import ptBR from 'date-fns/locale/pt-BR'
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
+import { Markdown } from './components/Markdown'
+
+import { PostContainer, PostContent, PostInfo } from './styles'
 
 export function Post() {
   const issueContent = useContextSelector(IssuesContext, (context) => {
@@ -76,7 +78,7 @@ export function Post() {
       </PostInfo>
 
       <PostContent>
-        <ReactMarkdown>{issueContent.body}</ReactMarkdown>
+        <Markdown content={issueContent.body} />
       </PostContent>
     </PostContainer>
   )

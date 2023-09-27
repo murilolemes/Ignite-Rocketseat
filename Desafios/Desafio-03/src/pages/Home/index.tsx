@@ -1,5 +1,6 @@
 import { Cards } from './components/Cards'
 import { Profile } from './components/Profile'
+
 import { HomeContainer, Publications } from './styles'
 
 export function Home() {

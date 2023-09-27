@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
-
-import { CardsContainer, DescriptionCard, HeaderCard } from './styles'
+import { useContextSelector } from 'use-context-selector'
 import { formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
-import { useContextSelector } from 'use-context-selector'
+
 import { IssuesContext } from '../../../../contexts/IssuesContext'
+
+import { CardsContainer, DescriptionCard, HeaderCard } from './styles'
 
 export function Cards() {
   const issues = useContextSelector(IssuesContext, (context) => {

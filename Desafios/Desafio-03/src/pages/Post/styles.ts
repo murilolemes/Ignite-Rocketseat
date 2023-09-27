@@ -76,11 +76,4 @@ export const PostContent = styled.div`
   max-width: 864px;
   margin: 0 auto;
   padding: 2.5rem 2rem;
-
-  div {
-    background: ${(props) => props.theme['base-post']};
-    border-radius: 2px;
-    padding: 1rem;
-    margin-top: 1.5rem;
-  }
 `
