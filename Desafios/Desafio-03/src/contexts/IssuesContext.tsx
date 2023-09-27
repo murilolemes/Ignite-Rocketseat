@@ -35,6 +35,7 @@ interface IssuesContextType {
   user?: UsersProps
   issues?: IssuesProps[]
   issueContent?: IssuesContentProps
+  fetchIssues: (query?: string) => Promise<void>
   fetchIssueContent: (url: string) => void
 }
 
@@ -59,10 +60,12 @@ export function IssuesProvider({ children }: IssuesProviderProps) {
     fetchUser()
   }, [fetchUser])
 
-  const fetchIssues = useCallback(async () => {
+  const fetchIssues = useCallback(async (query?: string) => {
+    const paramIssue = 'repo:rocketseat-education/reactjs-github-blog-challenge'
+
     const response = await apiGitHub.get('/search/issues', {
       params: {
-        q: 'repo:rocketseat-education/reactjs-github-blog-challenge',
+        q: `${query ? `${query} ${paramIssue}` : paramIssue}`,
       },
     })
 
@@ -78,11 +81,11 @@ export function IssuesProvider({ children }: IssuesProviderProps) {
   const fetchIssueContent = useCallback(async (url: string) => {
     const urlPath = url.split('https://api.github.com/')
 
-    const responseIssue = await apiGitHub.get(`/${urlPath[1]}`)
+    const responseIssue = await apiGitHub.get(`/ ${urlPath[1]}`)
 
     const userLogin = responseIssue.data.user.login
 
-    const responseUser = await apiGitHub.get(`/users/${userLogin}`)
+    const responseUser = await apiGitHub.get(`/ users / ${userLogin}`)
 
     setIsIssueContent({
       title: responseIssue.data.title,
@@ -98,7 +101,7 @@ export function IssuesProvider({ children }: IssuesProviderProps) {
 
   return (
     <IssuesContext.Provider
-      value={{ user, issues, issueContent, fetchIssueContent }}
+      value={{ user, issues, issueContent, fetchIssues, fetchIssueContent }}
     >
       {children}
     </IssuesContext.Provider>
