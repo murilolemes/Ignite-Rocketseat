@@ -1,15 +1,17 @@
 import { Roboto } from 'next/font/google'
+import { CartProvider } from 'use-shopping-cart'
 
-import { getCssText } from '@/styles'
-import Header from './components/Header'
+import Header from './components/header'
 import { globalStyles } from '@/styles/global'
 import { LayoutContainer } from '@/styles/layout'
+import { getCssText } from '@/styles'
 
 const roboto = Roboto({
   weight: ['400', '700'],
   subsets: ['latin'],
   display: 'swap',
 })
+
 globalStyles()
 
 export default function RootLayout({
@@ -17,6 +19,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const publicKey = process.env.STRIPE_PUBLIC_KEY
+    ? process.env.STRIPE_PUBLIC_KEY
+    : ''
+
   return (
     <html lang="en" className={roboto.className}>
       <head>
@@ -26,11 +32,18 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <LayoutContainer>
-          <Header />
+        <CartProvider
+          shouldPersist
+          cartMode="checkout-session"
+          stripe={publicKey}
+          currency="BRL"
+        >
+          <LayoutContainer>
+            <Header />
 
-          {children}
-        </LayoutContainer>
+            {children}
+          </LayoutContainer>
+        </CartProvider>
       </body>
     </html>
   )
